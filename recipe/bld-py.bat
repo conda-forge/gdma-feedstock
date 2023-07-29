@@ -1,8 +1,9 @@
+for /f %%i in ('python -c "import platform; print(int(platform.python_implementation() == 'PyPy'))"') do set IS_PYPY=%%i
 
 cmake %CMAKE_ARGS% ^
   -G "Ninja" ^
   -S "%SRC_DIR%\\pygdma" ^
-  -B "build_py%PY_VER%%python_impl%" ^
+  -B "build_py%PY_VER%%IS_PYPY%" ^
   -D CMAKE_BUILD_TYPE=Release ^
   -D CMAKE_INSTALL_PREFIX="%PREFIX%" ^
   -D CMAKE_CXX_COMPILER=clang-cl ^
@@ -19,7 +20,7 @@ cmake %CMAKE_ARGS% ^
   -D CMAKE_PREFIX_PATH="%LIBRARY_PREFIX%"
 if errorlevel 1 exit 1
 
-cmake --build build_py%PY_VER%%python_impl% ^
+cmake --build build_py%PY_VER%%IS_PYPY% ^
       --config Release ^
       --target install ^
       -- -j %CPU_COUNT%
