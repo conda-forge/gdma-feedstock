@@ -1,15 +1,14 @@
-{% set name = "gdma" %}
 {% set version = "2.3.3" %}
 {% set commit = "c2e0b548" %}
 {% set sha256 = "87c090b7415cd2126608019cad7a3e008c25171c7c8189adad399b6a86f8d383" %}
 
 package:
-  name: {{ name|lower }}-split
+  name: gdma-split
   version: {{ version }}
 
 source:
   #url: https://github.com/psi4/gdma/archive/v2.3.3.tar.gz  # equivalent to upstream plus patches
-  url: https://gitlab.com/anthonyjs/{{ name }}/-/archive/{{ commit }}.tar.bz2
+  url: https://gitlab.com/anthonyjs/gdma/-/archive/{{ commit }}.tar.bz2
   patches:
     - 0001-add-CMake-library-pymod-IO-git-avoidance.patch
   #patches:  # also equivalent to upstream plus single big patch, but c-b predicts patch levels wrong
@@ -85,6 +84,9 @@ outputs:
         - {{ compiler('cxx') }}
         - cmake
         - ninja
+        - python                                                                 # [build_platform != target_platform]
+        - cross-python_{{ target_platform }}                                     # [build_platform != target_platform]
+        - pybind11                                                               # [build_platform != target_platform]
       host:
         - {{ pin_subpackage('gdma', exact=True) }}
         - python
@@ -131,7 +133,7 @@ about:
   summary: "A. J. Stone's Distributed Multipole Analysis for Gaussian wavefunctions"
 
 extra:
-  feedstock-name: gdma 
+  feedstock-name: gdma
   recipe-maintainers:
     - loriab
     - davpoolechem
