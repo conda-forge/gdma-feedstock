@@ -12,7 +12,7 @@ IS_PYPY=$(${PYTHON} -c "import platform; print(int(platform.python_implementatio
 
 ${BUILD_PREFIX}/bin/cmake ${CMAKE_ARGS} ${ARCH_ARGS} \
   -S ${SRC_DIR}/pygdma \
-  -B build_py${PY_VER} \
+  -B build_py${PY_VER}${IS_PYPY} \
   -G Ninja \
   -D CMAKE_INSTALL_PREFIX=${PREFIX} \
   -D CMAKE_BUILD_TYPE=Release \
