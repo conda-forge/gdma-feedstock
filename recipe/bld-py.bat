@@ -19,7 +19,7 @@ cmake %CMAKE_ARGS% ^
   -D CMAKE_PREFIX_PATH="%LIBRARY_PREFIX%"
 if errorlevel 1 exit 1
 
-cmake --build build_py%PY_VER% ^
+cmake --build build_py%PY_VER%%IS_PYPY% ^
       --config Release ^
       --target install ^
       -- -j %CPU_COUNT%
