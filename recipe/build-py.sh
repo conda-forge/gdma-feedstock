@@ -8,11 +8,9 @@ if [ "$(uname)" == "Linux" ]; then
 
 fi
 
-IS_PYPY=$(${PYTHON} -c "import platform; print(int(platform.python_implementation() == 'PyPy'))")
-
 ${BUILD_PREFIX}/bin/cmake ${CMAKE_ARGS} ${ARCH_ARGS} \
   -S ${SRC_DIR}/pygdma \
-  -B build_py${PY_VER}${IS_PYPY} \
+  -B build_py${PY_VER}${python_impl} \
   -G Ninja \
   -D CMAKE_INSTALL_PREFIX=${PREFIX} \
   -D CMAKE_BUILD_TYPE=Release \
@@ -24,5 +22,5 @@ ${BUILD_PREFIX}/bin/cmake ${CMAKE_ARGS} ${ARCH_ARGS} \
   -D CMAKE_VERBOSE_MAKEFILE=OFF \
   -D CMAKE_PREFIX_PATH="${PREFIX}"
 
-cmake --build build_py${PY_VER}${IS_PYPY} --target install -j${CPU_COUNT}
+cmake --build build_py${PY_VER}${python_impl} --target install -j${CPU_COUNT}
 
