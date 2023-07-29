@@ -82,7 +82,7 @@ outputs:
     script: bld-py.bat                                                           # [win]
     build:
       script_env:
-       - python_impl
+       - python_impl={{ python_impl }}
     requirements:
       build:
         - {{ compiler('cxx') }}
