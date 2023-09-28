@@ -20,7 +20,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 2
+  number: 3
   binary_relocation: true
 
 outputs:
