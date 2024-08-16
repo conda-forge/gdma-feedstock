@@ -80,6 +80,8 @@ outputs:
   - name: pygdma
     script: build-py.sh                                                          # [unix]
     script: bld-py.bat                                                           # [win]
+    build:
+      skip: true                                                                 # [(aarch64 or ppc64le) and python_impl == 'pypy']
     requirements:
       build:
         - {{ stdlib("c") }}
