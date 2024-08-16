@@ -70,7 +70,7 @@ outputs:
         - if not exist %PREFIX%\\Library\\share\\cmake\\gdma\\gdmaConfig.cmake exit 1  # [win]
         - if not exist %PREFIX%\\Library\\share\\cmake\\gdma\\gdmaTargets-lib.cmake exit 1  # [win]
         # Inspect linkage
-        - ldd -v $PREFIX/lib/libgdma$SHLIB_EXT                                   # [linux]
+        - ldd -v $PREFIX/lib/libgdma$SHLIB_EXT                                   # [linux and build_platform == target_platform]
         - otool -L $PREFIX/lib/libgdma$SHLIB_EXT                                 # [osx]
         - objdump.exe -p %PREFIX%\\Library\\bin\\libgdma.dll | findstr /i "dll"  # [win]
         # Actually test
