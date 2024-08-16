@@ -20,7 +20,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 3
+  number: 4
   binary_relocation: true
 
 outputs:
@@ -32,6 +32,7 @@ outputs:
         - {{ pin_subpackage('gdma', max_pin='x.x') }}
     requirements:
       build:
+        - {{ stdlib("c") }}
         - {{ compiler('c') }}                                                    # [unix]
         - {{ compiler('fortran') }}                                              # [unix]
         - {{ compiler('m2w64_c') }}                                              # [win]
@@ -69,7 +70,7 @@ outputs:
         - if not exist %PREFIX%\\Library\\share\\cmake\\gdma\\gdmaConfig.cmake exit 1  # [win]
         - if not exist %PREFIX%\\Library\\share\\cmake\\gdma\\gdmaTargets-lib.cmake exit 1  # [win]
         # Inspect linkage
-        - ldd -v $PREFIX/lib/libgdma$SHLIB_EXT                                   # [linux]
+        - ldd -v $PREFIX/lib/libgdma$SHLIB_EXT                                   # [linux and build_platform == target_platform]
         - otool -L $PREFIX/lib/libgdma$SHLIB_EXT                                 # [osx]
         - objdump.exe -p %PREFIX%\\Library\\bin\\libgdma.dll | findstr /i "dll"  # [win]
         # Actually test
@@ -79,8 +80,11 @@ outputs:
   - name: pygdma
     script: build-py.sh                                                          # [unix]
     script: bld-py.bat                                                           # [win]
+    build:
+      skip: true                                                                 # [(aarch64 or ppc64le) and python_impl == 'pypy']
     requirements:
       build:
+        - {{ stdlib("c") }}
         - {{ compiler('cxx') }}
         - cmake
         - ninja
@@ -114,7 +118,7 @@ outputs:
         - if not exist %PREFIX%\\Library\\share\\cmake\\gdma\\gdmaConfig.cmake exit 1  # [win]
         - if not exist %PREFIX%\\Library\\share\\cmake\\gdma\\gdmaTargets-Python.cmake exit 1  # [win]
         # Inspect linkage
-        - ldd -v $SP_DIR/gdma*.so                                                # [linux]
+        - ldd -v $SP_DIR/gdma*.so                                                # [linux and build_platform == target_platform]
         - otool -L $SP_DIR/gdma*.so                                              # [osx]
         - objdump.exe -p %SP_DIR%\\gdma.*.pyd | findstr /i "dll"                 # [win]
         # Actually test
