@@ -20,7 +20,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 5
+  number: 6
   binary_relocation: true
 
 outputs:
@@ -33,15 +33,12 @@ outputs:
     requirements:
       build:
         - {{ stdlib("c") }}
-        - {{ compiler('c') }}                                                    # [unix]
-        - {{ compiler('fortran') }}                                              # [unix]
-        - {{ compiler('m2w64_c') }}                                              # [win]
-        - {{ compiler('m2w64_fortran') }}                                        # [win]
+        - {{ compiler("c") }}
+        - {{ compiler("fortran") }}
         - cmake
         - ninja
         - python 3.10                                                                      # only for generating a source file, so suppress all but one Py version. update as necessary.
       run:
-        - m2w64-gcc-libgfortran                                                  # [win]
     test:
       requires:
         - m2w64-binutils                                                         # [win]   # provides objdump.exe
