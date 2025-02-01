@@ -2,7 +2,7 @@
 
 set -o xtrace -o nounset -o pipefail -o errexit
 
-cmake ${CMAKE_ARGS} ${ARCH_ARGS} \
+cmake ${CMAKE_ARGS} \
   -S ${SRC_DIR} \
   -B build \
   -G Ninja \
