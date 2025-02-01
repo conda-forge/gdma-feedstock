@@ -86,7 +86,6 @@ Current release info
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-gdma-green.svg)](https://anaconda.org/conda-forge/gdma) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/gdma.svg)](https://anaconda.org/conda-forge/gdma) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/gdma.svg)](https://anaconda.org/conda-forge/gdma) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/gdma.svg)](https://anaconda.org/conda-forge/gdma) |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-pygdma-green.svg)](https://anaconda.org/conda-forge/pygdma) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/pygdma.svg)](https://anaconda.org/conda-forge/pygdma) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/pygdma.svg)](https://anaconda.org/conda-forge/pygdma) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/pygdma.svg)](https://anaconda.org/conda-forge/pygdma) |
 
 Installing gdma
 ===============
@@ -98,16 +97,16 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `gdma, pygdma` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `gdma` can be installed with `conda`:
 
 ```
-conda install gdma pygdma
+conda install gdma
 ```
 
 or with `mamba`:
 
 ```
-mamba install gdma pygdma
+mamba install gdma
 ```
 
 It is possible to list all of the versions of `gdma` available on your platform with `conda`:
