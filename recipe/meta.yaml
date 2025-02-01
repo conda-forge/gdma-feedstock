@@ -67,7 +67,7 @@ outputs:
         # Inspect linkage
         - ldd -v $PREFIX/lib/libgdma$SHLIB_EXT                                   # [linux and build_platform == target_platform]
         - otool -L $PREFIX/lib/libgdma$SHLIB_EXT                                 # [osx]
-        - %OBJDUMP% -p %PREFIX%\\Library\\bin\\libgdma.dll | findstr /i "dll"  # [win]
+        - '%OBJDUMP% -p %PREFIX%\\Library\\bin\\libgdma.dll | findstr /i "dll"'  # [win]
         # Actually test
         - cd examples/H2O/ && gdma < data                                        # [unix]
         - cd examples/H2O/ && gdma.exe < data                                    # [win]
@@ -114,7 +114,7 @@ outputs:
         # Inspect linkage
         - ldd -v $SP_DIR/gdma*.so                                                # [linux and build_platform == target_platform]
         - otool -L $SP_DIR/gdma*.so                                              # [osx]
-        - %OBJDUMP% -p %SP_DIR%\\gdma.*.pyd | findstr /i "dll"                 # [win]
+        - '%OBJDUMP% -p %SP_DIR%\\gdma.*.pyd | findstr /i "dll"'                 # [win]
         # Actually test
         - pip check
         - cd examples/H2O/ && python -c "import gdma; print(gdma.__version__); gdma.run_gdma('stdout', 'data')"
