@@ -20,8 +20,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 5
-  binary_relocation: true
+  number: 6
 
 outputs:
   - name: gdma
@@ -39,12 +38,8 @@ outputs:
         - {{ compiler('m2w64_fortran') }}                                        # [win]
         - cmake
         - ninja
-        - python 3.10                                                                      # only for generating a source file, so suppress all but one Py version. update as necessary.
-      run:
-        - m2w64-gcc-libgfortran                                                  # [win]
+        - python 3.12                                                                      # only for generating a source file, so suppress all but one Py version. update as necessary.
     test:
-      requires:
-        - m2w64-binutils                                                         # [win]   # provides objdump.exe
       source_files:
         - examples/H2O/data
         - examples/H2O/H2O.fchk
@@ -72,7 +67,7 @@ outputs:
         # Inspect linkage
         - ldd -v $PREFIX/lib/libgdma$SHLIB_EXT                                   # [linux and build_platform == target_platform]
         - otool -L $PREFIX/lib/libgdma$SHLIB_EXT                                 # [osx]
-        - objdump.exe -p %PREFIX%\\Library\\bin\\libgdma.dll | findstr /i "dll"  # [win]
+        - %OBJDUMP% -p %PREFIX%\\Library\\bin\\libgdma.dll | findstr /i "dll"  # [win]
         # Actually test
         - cd examples/H2O/ && gdma < data                                        # [unix]
         - cd examples/H2O/ && gdma.exe < data                                    # [win]
@@ -81,7 +76,7 @@ outputs:
     script: build-py.sh                                                          # [unix]
     script: bld-py.bat                                                           # [win]
     build:
-      skip: true                                                                 # [(aarch64 or ppc64le) and python_impl == 'pypy']
+      skip: true
     requirements:
       build:
         - {{ stdlib("c") }}
@@ -102,7 +97,6 @@ outputs:
     test:
       requires:
         - pip                                                                              # provides `pip check`
-        - m2w64-binutils                                                         # [win]   # provides objdump.exe
       source_files:
         - examples/H2O/data
         - examples/H2O/H2O.fchk
@@ -120,7 +114,7 @@ outputs:
         # Inspect linkage
         - ldd -v $SP_DIR/gdma*.so                                                # [linux and build_platform == target_platform]
         - otool -L $SP_DIR/gdma*.so                                              # [osx]
-        - objdump.exe -p %SP_DIR%\\gdma.*.pyd | findstr /i "dll"                 # [win]
+        - %OBJDUMP% -p %SP_DIR%\\gdma.*.pyd | findstr /i "dll"                 # [win]
         # Actually test
         - pip check
         - cd examples/H2O/ && python -c "import gdma; print(gdma.__version__); gdma.run_gdma('stdout', 'data')"
@@ -133,7 +127,6 @@ about:
   license: GPL-3.0-only
   license_url: https://opensource.org/license/gpl-3-0/
   license_file: LICENCE
-  license_family: GPL
   summary: "A. J. Stone's Distributed Multipole Analysis for Gaussian wavefunctions"
 
 extra:
