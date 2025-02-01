@@ -3,6 +3,8 @@ cmake %CMAKE_ARGS% ^
   -S %SRC_DIR% ^
   -B build ^
   -D CMAKE_BUILD_TYPE=Release ^
+  -D CMAKE_C_COMPILER=%CC% ^
+  -D FORTRAN_COMPILER=%FC% ^
   -D gdma_INSTALL_CMAKEDIR="Library\share\cmake\gdma" ^
   -D gdma_ENABLE_PYTHON=OFF ^
   -D BUILD_SHARED_LIBS=ON ^
