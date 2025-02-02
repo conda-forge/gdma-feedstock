@@ -31,9 +31,12 @@ outputs:
         - {{ pin_subpackage('gdma', max_pin='x.x') }}
     requirements:
       build:
-        - {{ stdlib("c") }}
-        - {{ compiler('c') }}
-        - {{ compiler('fortran') }}
+        - {{ stdlib("c") }}                                                      # [unix]
+        - {{ compiler('c') }}                                                    # [unix]
+        - {{ compiler('fortran') }}                                              # [unix]
+        - {{ stdlib("m2w64_c") }}                                                # [win]
+        - {{ compiler('m2w64_c') }}                                              # [win]
+        - {{ compiler('m2w64_fortran') }}                                        # [win]
         - cmake
         - ninja
         - python 3.12                                                                      # only for generating a source file, so suppress all but one Py version. update as necessary.
@@ -75,8 +78,12 @@ outputs:
     script: bld-py.bat                                                           # [win]
     requirements:
       build:
-        - {{ stdlib("c") }}
-        - {{ compiler('cxx') }}
+        - {{ stdlib("c") }}                                                      # [unix]
+        - {{ compile("c") }}                                                     # [unix]
+        - {{ compiler('cxx') }}                                                  # [unix]
+        - {{ stdlib("m2w64_c") }}                                                # [unix]
+        - {{ compile("m2w64_c") }}                                               # [unix]
+        - {{ compiler('m2w64_cxx') }}                                            # [unix]
         - cmake
         - ninja
         - python                                                                 # [build_platform != target_platform]
