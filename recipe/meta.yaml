@@ -79,10 +79,10 @@ outputs:
     requirements:
       build:
         - {{ stdlib("c") }}                                                      # [unix]
-        - {{ compile("c") }}                                                     # [unix]
+        - {{ compiler("c") }}                                                     # [unix]
         - {{ compiler('cxx') }}                                                  # [unix]
         - {{ stdlib("m2w64_c") }}                                                # [unix]
-        - {{ compile("m2w64_c") }}                                               # [unix]
+        - {{ compiler("m2w64_c") }}                                               # [unix]
         - {{ compiler('m2w64_cxx') }}                                            # [unix]
         - cmake
         - ninja
