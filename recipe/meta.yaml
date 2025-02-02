@@ -32,10 +32,8 @@ outputs:
     requirements:
       build:
         - {{ stdlib("c") }}
-        - {{ compiler('c') }}                                                    # [unix]
-        - {{ compiler('fortran') }}                                              # [unix]
-        - {{ compiler('m2w64_c') }}                                              # [win]
-        - {{ compiler('m2w64_fortran') }}                                        # [win]
+        - {{ compiler('c') }}
+        - {{ compiler('fortran') }}
         - cmake
         - ninja
         - python 3.12                                                                      # only for generating a source file, so suppress all but one Py version. update as necessary.
