@@ -3,7 +3,6 @@ cmake %CMAKE_ARGS% ^
   -S "%SRC_DIR%\\pygdma" ^
   -B "build_py%PY_VER%" ^
   -D CMAKE_BUILD_TYPE=Release ^
-  -D CMAKE_CXX_FLAGS="/EHsc %CXXFLAGS%" ^
   -D CMAKE_C_COMPILER=%CC% ^
   -D FORTRAN_COMPILER=%FC% ^
   -D PYMOD_INSTALL_LIBDIR="/../../Lib/site-packages" ^
