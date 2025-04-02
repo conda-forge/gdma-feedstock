@@ -5,6 +5,8 @@ cmake %CMAKE_ARGS% ^
   -B build ^
   -D CMAKE_BUILD_TYPE=Release ^
   -D CMAKE_INSTALL_PREFIX="%PREFIX%" ^
+  -D CMAKE_C_COMPILER=%CC% ^
+  -D FORTRAN_COMPILER=%FC% ^
   -D CMAKE_C_FLAGS="%CFLAGS%" ^
   -D CMAKE_Fortran_FLAGS="%FFLAGS%" ^
   -D CMAKE_INSTALL_LIBDIR="Library\lib" ^
