@@ -9,6 +9,7 @@ cmake %CMAKE_ARGS% ^
   -D FORTRAN_COMPILER=%FC% ^
   -D CMAKE_C_FLAGS="%CFLAGS%" ^
   -D CMAKE_Fortran_FLAGS="%FFLAGS%" ^
+  -D CMAKE_LINKER_TYPE=LLD ^
   -D CMAKE_INSTALL_LIBDIR="Library\lib" ^
   -D CMAKE_INSTALL_INCLUDEDIR="Library\include" ^
   -D CMAKE_INSTALL_BINDIR="Library\bin" ^
