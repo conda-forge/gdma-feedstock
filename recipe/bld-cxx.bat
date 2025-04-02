@@ -5,11 +5,10 @@ cmake %CMAKE_ARGS% ^
   -B build ^
   -D CMAKE_BUILD_TYPE=Release ^
   -D CMAKE_INSTALL_PREFIX="%PREFIX%" ^
-  -D CMAKE_C_COMPILER=%CC% ^
+  -D CMAKE_C_COMPILER=clang-cl ^
+  -D CMAKE_C_FLAGS="/EHsc %CFLAGS%" ^
   -D FORTRAN_COMPILER=%FC% ^
-  -D CMAKE_C_FLAGS="%CFLAGS%" ^
   -D CMAKE_Fortran_FLAGS="%FFLAGS%" ^
-  -D CMAKE_LINKER_TYPE=LLD ^
   -D CMAKE_INSTALL_LIBDIR="Library\lib" ^
   -D CMAKE_INSTALL_INCLUDEDIR="Library\include" ^
   -D CMAKE_INSTALL_BINDIR="Library\bin" ^
