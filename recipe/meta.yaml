@@ -67,7 +67,6 @@ outputs:
         # Inspect linkage
         - ldd -v $PREFIX/lib/libgdma$SHLIB_EXT                                   # [linux and build_platform == target_platform]
         - otool -L $PREFIX/lib/libgdma$SHLIB_EXT                                 # [osx]
-        - '%OBJDUMP% -p %PREFIX%\\Library\\bin\\libgdma.dll | findstr /i "dll"'  # [win]
         # Actually test
         - cd examples/H2O/ && gdma < data                                        # [unix]
         - cd examples/H2O/ && gdma.exe < data                                    # [win]

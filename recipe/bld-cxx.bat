@@ -1,3 +1,11 @@
+@ECHO ON
+SetLocal EnableDelayedExpansion
+
+:: flang still uses a temporary name not recognized by CMake
+::copy %BUILD_PREFIX%\Library\bin\flang-new.exe %BUILD_PREFIX%\Library\bin\flang.exe
+
+:: millions of lines of warnings with clang-19
+::set "CFLAGS=%CFLAGS% -w"
 
 cmake %CMAKE_ARGS% ^
   -G "Ninja" ^
