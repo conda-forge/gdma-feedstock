@@ -2,10 +2,10 @@
 SetLocal EnableDelayedExpansion
 
 :: flang still uses a temporary name not recognized by CMake
-::copy %BUILD_PREFIX%\Library\bin\flang-new.exe %BUILD_PREFIX%\Library\bin\flang.exe
+copy %BUILD_PREFIX%\Library\bin\flang-new.exe %BUILD_PREFIX%\Library\bin\flang.exe
 
 :: millions of lines of warnings with clang-19
-::set "CFLAGS=%CFLAGS% -w"
+set "CFLAGS=%CFLAGS% -w"
 
 cmake %CMAKE_ARGS% ^
   -G "Ninja" ^
@@ -13,9 +13,9 @@ cmake %CMAKE_ARGS% ^
   -B build ^
   -D CMAKE_BUILD_TYPE=Release ^
   -D CMAKE_INSTALL_PREFIX="%PREFIX%" ^
-  -D CMAKE_C_COMPILER=clang-cl ^
+  -D CMAKE_C_COMPILER="clang-cl" ^
   -D CMAKE_C_FLAGS="/EHsc %CFLAGS%" ^
-  -D FORTRAN_COMPILER=%FC% ^
+  -D FORTRAN_COMPILER="flang" ^
   -D CMAKE_Fortran_FLAGS="%FFLAGS%" ^
   -D CMAKE_INSTALL_LIBDIR="Library\lib" ^
   -D CMAKE_INSTALL_INCLUDEDIR="Library\include" ^
