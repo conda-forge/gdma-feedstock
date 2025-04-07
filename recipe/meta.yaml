@@ -11,6 +11,8 @@ source:
   url: https://gitlab.com/anthonyjs/gdma/-/archive/{{ commit }}.tar.bz2
   patches:
     - 0001-add-CMake-library-pymod-IO-git-avoidance.patch
+    - 0002-real128-to-real64.patch
+  # 0002-real128-to-real64.patch only win evenually TODO
   #patches:  # also equivalent to upstream plus single big patch, but c-b predicts patch levels wrong
   #  - 0001-fix-use-input-bug-build-outside-git-generalize-pytho.patch
   #  - 0002-add-IO-management-form-library-as-well-as-executable.patch
