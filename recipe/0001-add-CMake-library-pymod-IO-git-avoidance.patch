@@ -42,6 +42,10 @@ index 0000000..3991e02
 @@ -0,0 +1,153 @@
 +cmake_policy(SET CMP0048 NEW)
 +cmake_minimum_required(VERSION 3.16)
++if(POLICY CMP0177)
++    cmake_policy(SET CMP0177 NEW)
++endif()
++
 +project(gdma
 +        VERSION 2.3.3
 +        LANGUAGES C Fortran)
