@@ -39,7 +39,7 @@ new file mode 100644
 index 0000000..3991e02
 --- /dev/null
 +++ b/CMakeLists.txt
-@@ -0,0 +1,157 @@
+@@ -0,0 +1,159 @@
 +cmake_policy(SET CMP0048 NEW)
 +cmake_minimum_required(VERSION 3.16)
 +if(POLICY CMP0177)
@@ -120,6 +120,7 @@ index 0000000..3991e02
 +
 +    if(APPLE)
 +        set_target_properties(gdma PROPERTIES LINK_FLAGS "-undefined dynamic_lookup")
++        set_target_properties(gdma PROPERTIES ENABLE_EXPORTS ON)
 +    endif()
 +endif()
 +
@@ -129,15 +130,16 @@ index 0000000..3991e02
 +set_target_properties(gdma PROPERTIES gdma_VERSION ${gdma_VERSION})
 +set_property(TARGET gdma APPEND PROPERTY EXPORT_PROPERTIES "${export_properties}")
 +
-+#TMPadd_executable(gdmaexe src/exe.f90)
-+#TMPadd_executable(gdma::exe ALIAS gdmaexe)
-+#TMPtarget_link_libraries(gdmaexe gdma)
-+#TMPset_target_properties(gdmaexe
-+#TMP  PROPERTIES
-+#TMP    INSTALL_RPATH "$ORIGIN/../${CMAKE_INSTALL_LIBDIR}"
-+#TMP    EXPORT_NAME "exe"
-+#TMP    OUTPUT_NAME "gdma"
-+#TMP  )
++add_executable(gdmaexe src/exe.f90)
++add_executable(gdma::exe ALIAS gdmaexe)
++target_link_libraries(gdmaexe gdma)
++set_target_properties(gdmaexe
++  PROPERTIES
++    INSTALL_RPATH "$ORIGIN/../${CMAKE_INSTALL_LIBDIR}"
++    EXPORT_NAME "exe"
++    OUTPUT_NAME "gdma"
++    ENABLE_EXPORTS ON
++  )
 +
 +# Python directory
 +if (gdma_ENABLE_PYTHON)
@@ -151,7 +153,7 @@ index 0000000..3991e02
 +install(
 +  TARGETS
 +    gdma
-+    #TMPgdmaexe
++    gdmaexe
 +  EXPORT
 +    library_interface
 +  RUNTIME DESTINATION
