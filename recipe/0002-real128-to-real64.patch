@@ -1,0 +1,38 @@
+From 8508d26d5c80bd7ada0aece691db8f9391893f13 Mon Sep 17 00:00:00 2001
+From: "Lori A. Burns" <lori.burns@gmail.com>
+Date: Mon, 7 Apr 2025 00:19:51 -0400
+Subject: [PATCH] real128 to real64
+
+---
+ src/input.F90 | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/src/input.F90 b/src/input.F90
+index a999cbb..02bdc16 100644
+--- a/src/input.F90
++++ b/src/input.F90
+@@ -644,8 +644,8 @@ SUBROUTINE read_quad(A,factor)
+ !  If the optional argument factor is present, the value read should be
+ !  divided by it. (External value = factor*internal value)
+ 
+-REAL(KIND=real128), INTENT(INOUT) :: a
+-REAL(KIND=real128), INTENT(IN), OPTIONAL :: factor
++REAL(KIND=real64), INTENT(INOUT) :: a
++REAL(KIND=real64), INTENT(IN), OPTIONAL :: factor
+ 
+ CHARACTER(LEN=50) :: string
+ 
+@@ -849,8 +849,8 @@ SUBROUTINE get_quad(A,factor)
+ !  If the optional argument factor is present, the value read should be
+ !  divided by it. (External value = factor*internal value)
+ 
+-REAL(real128), INTENT(INOUT) :: A
+-REAL(real128), INTENT(IN), OPTIONAL :: factor
++REAL(real64), INTENT(INOUT) :: A
++REAL(real64), INTENT(IN), OPTIONAL :: factor
+ 
+ LOGICAL :: eof
+ 
+-- 
+2.40.1
+
