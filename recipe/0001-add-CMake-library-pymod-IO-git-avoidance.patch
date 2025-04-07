@@ -125,15 +125,15 @@ index 0000000..3991e02
 +set_target_properties(gdma PROPERTIES gdma_VERSION ${gdma_VERSION})
 +set_property(TARGET gdma APPEND PROPERTY EXPORT_PROPERTIES "${export_properties}")
 +
-+add_executable(gdmaexe src/exe.f90)
-+add_executable(gdma::exe ALIAS gdmaexe)
-+target_link_libraries(gdmaexe gdma)
-+set_target_properties(gdmaexe
-+  PROPERTIES
-+    INSTALL_RPATH "$ORIGIN/../${CMAKE_INSTALL_LIBDIR}"
-+    EXPORT_NAME "exe"
-+    OUTPUT_NAME "gdma"
-+  )
++#TMPadd_executable(gdmaexe src/exe.f90)
++#TMPadd_executable(gdma::exe ALIAS gdmaexe)
++#TMPtarget_link_libraries(gdmaexe gdma)
++#TMPset_target_properties(gdmaexe
++#TMP  PROPERTIES
++#TMP    INSTALL_RPATH "$ORIGIN/../${CMAKE_INSTALL_LIBDIR}"
++#TMP    EXPORT_NAME "exe"
++#TMP    OUTPUT_NAME "gdma"
++#TMP  )
 +
 +# Python directory
 +if (gdma_ENABLE_PYTHON)
@@ -147,7 +147,7 @@ index 0000000..3991e02
 +install(
 +  TARGETS
 +    gdma
-+    gdmaexe
++    #TMPgdmaexe
 +  EXPORT
 +    library_interface
 +  RUNTIME DESTINATION
