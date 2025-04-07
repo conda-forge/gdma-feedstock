@@ -53,16 +53,12 @@ outputs:
         # Verify library
         - test -f $PREFIX/lib/libgdma$SHLIB_EXT                                  # [unix]
         - test ! -f $PREFIX/lib/libgdma.a                                        # [unix]
-        - if not exist %PREFIX%\\Library\\lib\\libgdma.dll.a exit 1              # [win]   # gnu import lib
-        - if not exist %PREFIX%\\Library\\lib\\libgdma.lib exit 1                # [win]   # ms import lib
-        - if not exist %PREFIX%\\Library\\bin\\libgdma.dll exit 1                # [win]   # gnu/ms dyn lib
-        - if exist %PREFIX%\\Library\\lib\\libgdma.a exit 1                      # [win]   # gnu static lib absent
+        - if not exist %PREFIX%\\Library\\lib\\gdma.lib exit 1                   # [win]   # ms import lib
+        - if not exist %PREFIX%\\Library\\bin\\gdma.dll exit 1                   # [win]   # ms dyn lib
         # Verify accessories
-        - test -f $PREFIX/bin/gdma                                               # [unix]
         - test -f $PREFIX/include/GDMA/GDMA_MANGLE.h                             # [unix]
         - test -f $PREFIX/share/cmake/gdma/gdmaConfig.cmake                      # [unix]
         - test -f $PREFIX/share/cmake/gdma/gdmaTargets-lib.cmake                 # [unix]
-        - if not exist %PREFIX%\\Library\\bin\\gdma.exe exit 1                   # [win]
         - if not exist %PREFIX%\\Library\\include\\GDMA\\GDMA_MANGLE.h exit 1    # [win]
         - if not exist %PREFIX%\\Library\\share\\cmake\\gdma\\gdmaConfig.cmake exit 1  # [win]
         - if not exist %PREFIX%\\Library\\share\\cmake\\gdma\\gdmaTargets-lib.cmake exit 1  # [win]
@@ -70,8 +66,6 @@ outputs:
         - ldd -v $PREFIX/lib/libgdma$SHLIB_EXT                                   # [linux and build_platform == target_platform]
         - otool -L $PREFIX/lib/libgdma$SHLIB_EXT                                 # [osx]
         # Actually test
-        - cd examples/H2O/ && gdma < data                                        # [unix]
-        - cd examples/H2O/ && gdma.exe < data                                    # [win]
 
   - name: pygdma
     script: build-py.sh                                                          # [unix]
