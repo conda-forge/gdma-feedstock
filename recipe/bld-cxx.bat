@@ -16,7 +16,7 @@ cmake %CMAKE_ARGS% ^
   -D CMAKE_C_COMPILER="clang-cl" ^
   -D CMAKE_C_FLAGS="/EHsc %CFLAGS%" ^
   -D FORTRAN_COMPILER="flang" ^
-  -D CMAKE_Fortran_FLAGS="%FFLAGS% -std=f95" ^
+  -D CMAKE_Fortran_FLAGS="%FFLAGS%" ^
   -D CMAKE_INSTALL_LIBDIR="Library\lib" ^
   -D CMAKE_INSTALL_INCLUDEDIR="Library\include" ^
   -D CMAKE_INSTALL_BINDIR="Library\bin" ^
