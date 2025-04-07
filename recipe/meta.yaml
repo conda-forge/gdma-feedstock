@@ -92,7 +92,6 @@ outputs:
     test:
       requires:
         - pip                                                                              # provides `pip check`
-        - m2w64-binutils                                                         # [win]   # provides objdump.exe
       source_files:
         - examples/H2O/data
         - examples/H2O/H2O.fchk
@@ -110,10 +109,10 @@ outputs:
         # Inspect linkage
         - ldd -v $SP_DIR/gdma*.so                                                # [linux and build_platform == target_platform]
         - otool -L $SP_DIR/gdma*.so                                              # [osx]
-        - objdump.exe -p %SP_DIR%\\gdma.*.pyd | findstr /i "dll"                 # [win]
         # Actually test
         - pip check
-        - cd examples/H2O/ && python -c "import gdma; print(gdma.__version__); gdma.run_gdma('stdout', 'data')"
+        - python -c "import gdma; print(gdma.__version__)"
+        - cd examples/H2O/ && python -c "import gdma; gdma.run_gdma('stdout', 'data')"
 
 about:
   home: https://www-stone.ch.cam.ac.uk/pub/gdma/
