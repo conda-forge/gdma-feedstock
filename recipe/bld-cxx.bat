@@ -1,6 +1,10 @@
 @ECHO ON
 SetLocal EnableDelayedExpansion
 
+set "CC=clang-cl.exe"
+set "CXX=clang-cl.exe"
+set "FC=flang.exe"
+
 :: flang still uses a temporary name not recognized by CMake
 copy %BUILD_PREFIX%\Library\bin\flang-new.exe %BUILD_PREFIX%\Library\bin\flang.exe
 
@@ -13,9 +17,7 @@ cmake %CMAKE_ARGS% ^
   -B build ^
   -D CMAKE_BUILD_TYPE=Release ^
   -D CMAKE_INSTALL_PREFIX="%PREFIX%" ^
-  -D CMAKE_C_COMPILER="clang-cl" ^
   -D CMAKE_C_FLAGS="/EHsc %CFLAGS%" ^
-  -D FORTRAN_COMPILER="flang" ^
   -D CMAKE_Fortran_FLAGS="%FFLAGS%" ^
   -D CMAKE_INSTALL_LIBDIR="Library\lib" ^
   -D CMAKE_INSTALL_INCLUDEDIR="Library\include" ^
