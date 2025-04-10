@@ -1,6 +1,6 @@
 c_compiler:                # [win]
-  - clang-cl               # [win]
+  - clang                  # [win]
 cxx_compiler:              # [win]
-  - clang-cl               # [win]
+  - clang                  # [win]
 fortran_compiler_version:  # [win]
   - 20                     # [win]
