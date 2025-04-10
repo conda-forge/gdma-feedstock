@@ -4,7 +4,7 @@ SetLocal EnableDelayedExpansion
 set "CC=clang-cl.exe"
 set "CXX=clang-cl.exe"
 set "FC=flang.exe"
-set "LD=link.exe"
+::set "LD=link.exe"
 
 :: flang still uses a temporary name not recognized by CMake
 copy %BUILD_PREFIX%\Library\bin\flang-new.exe %BUILD_PREFIX%\Library\bin\flang.exe
