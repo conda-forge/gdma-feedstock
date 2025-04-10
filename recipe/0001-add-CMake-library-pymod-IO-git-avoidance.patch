@@ -120,8 +120,8 @@ index 0000000..3991e02
 +
 +    if(APPLE)
 +        set_target_properties(libgdma PROPERTIES LINK_FLAGS "-undefined dynamic_lookup")
-+        set_target_properties(libgdma PROPERTIES ENABLE_EXPORTS ON)
 +    endif()
++    set_target_properties(libgdma PROPERTIES ENABLE_EXPORTS ON)
 +endif()
 +
 +set(export_properties
@@ -138,7 +138,7 @@ index 0000000..3991e02
 +    INSTALL_RPATH "$ORIGIN/../${CMAKE_INSTALL_LIBDIR}"
 +    EXPORT_NAME "exe"
 +    OUTPUT_NAME "gdma"
-+    ENABLE_EXPORTS ON
++    #ENABLE_EXPORTS ON
 +  )
 +
 +# Python directory
