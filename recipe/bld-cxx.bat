@@ -5,8 +5,15 @@ SetLocal EnableDelayedExpansion
 ::set "CXX=clang-cl.exe"
 ::set "FC=flang.exe"
 ::set "LD=link.exe"
+
+:: clang-win-activation-feedstock/.../activate-clang-cl_win-64.bat
 ::set "LDFLAGS=/link /DEFAULTLIB:%CONDA_PREFIX%\lib\clang\@MAJOR_VER@\lib\windows\clang_rt.builtins-x86_64.lib"
-set "LDFLAGS=-nostdlib -Wl,-defaultlib:%CONDA_PREFIX:\=/%/lib/clang/@MAJOR_VER@/lib/windows/clang_rt.builtins-x86_64.lib"
+
+:: flang-activation-feedstock/.../activate.bat
+set "LDFLAGS=%LDFLAGS% -Wl,-defaultlib:%CONDA_PREFIX:\=/%/lib/clang/@MAJOR_VER@/lib/windows/clang_rt.builtins-x86_64.lib"
+
+:: clang-win-activation-feedstock/.../activate-clang_win-64.bat
+::set "LDFLAGS=-nostdlib -Wl,-defaultlib:%CONDA_PREFIX:\=/%/lib/clang/@MAJOR_VER@/lib/windows/clang_rt.builtins-x86_64.lib"
 
 :: flang still uses a temporary name not recognized by CMake
 copy %BUILD_PREFIX%\Library\bin\flang-new.exe %BUILD_PREFIX%\Library\bin\flang.exe
@@ -34,6 +41,22 @@ cmake %CMAKE_ARGS% ^
   -D CMAKE_VERBOSE_MAKEFILE=OFF ^
   -D CMAKE_PREFIX_PATH="%LIBRARY_PREFIX%"
 if errorlevel 1 exit 1
+
+cmake --build build ^
+      --config Release ^
+      --target libgdma ^
+      -- -j %CPU_COUNT%
+if errorlevel 1 exit 1
+
+dir build
+
+cmake --build build ^
+      --config Release ^
+      --target gdmaexe ^
+      -- -j %CPU_COUNT%
+if errorlevel 1 exit 1
+
+dir build
 
 cmake --build build ^
       --config Release ^
