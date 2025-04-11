@@ -6,6 +6,9 @@ SetLocal EnableDelayedExpansion
 ::set "FC=flang.exe"
 ::set "LD=link.exe"
 
+echo %LDFLAGS%
+echo %MAJOR_VER%
+
 :: clang-win-activation-feedstock/.../activate-clang-cl_win-64.bat
 ::set "LDFLAGS=/link /DEFAULTLIB:%CONDA_PREFIX%\lib\clang\@MAJOR_VER@\lib\windows\clang_rt.builtins-x86_64.lib"
 ::set "LDFLAGS=/DEFAULTLIB:%CONDA_PREFIX%\lib\clang\@MAJOR_VER@\lib\windows\clang_rt.builtins-x86_64.lib"
@@ -57,6 +60,8 @@ cmake --build build ^
 if errorlevel 1 exit 1
 
 dir build
+:: objdump.exe -p %PREFIX%\Lib\site-packages\psi4\core.*.pyd | findstr /i "dll"
+objdump.exe -p build\libgdma.dll
 
 cmake --build build ^
       --config Release ^
