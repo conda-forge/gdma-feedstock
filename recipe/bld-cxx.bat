@@ -8,7 +8,9 @@ SetLocal EnableDelayedExpansion
 
 :: clang-win-activation-feedstock/.../activate-clang-cl_win-64.bat
 ::set "LDFLAGS=/link /DEFAULTLIB:%CONDA_PREFIX%\lib\clang\@MAJOR_VER@\lib\windows\clang_rt.builtins-x86_64.lib"
-set "LDFLAGS=/DEFAULTLIB:%CONDA_PREFIX%\lib\clang\@MAJOR_VER@\lib\windows\clang_rt.builtins-x86_64.lib"
+::set "LDFLAGS=/DEFAULTLIB:%CONDA_PREFIX%\lib\clang\@MAJOR_VER@\lib\windows\clang_rt.builtins-x86_64.lib"
+set "LDFLAGS=/DEFAULTLIB:%CONDA_PREFIX%\lib\clang\20\lib\windows\clang_rt.builtins-x86_64.lib"
+
 
 :: flang-activation-feedstock/.../activate.bat
 :: FAILS: "D:/bld/gdma-split_1744384002874/_build_env/Library/bin/clang-cl.exe" is not able to compile a simple test program.
