@@ -39,9 +39,13 @@ new file mode 100644
 index 0000000..3991e02
 --- /dev/null
 +++ b/CMakeLists.txt
-@@ -0,0 +1,153 @@
+@@ -0,0 +1,159 @@
 +cmake_policy(SET CMP0048 NEW)
 +cmake_minimum_required(VERSION 3.16)
++if(POLICY CMP0177)
++    cmake_policy(SET CMP0177 NEW)
++endif()
++
 +project(gdma
 +        VERSION 2.3.3
 +        LANGUAGES C Fortran)
@@ -106,33 +110,35 @@ index 0000000..3991e02
 +  )
 +
 +# STATIC/SHARED on below governed by BUILD_SHARED_LIBS
-+add_library(gdma ${sources_list} ${CMAKE_CURRENT_BINARY_DIR}/version.f90)
-+add_library(gdma::gdma ALIAS gdma)
++add_library(libgdma ${sources_list} ${CMAKE_CURRENT_BINARY_DIR}/version.f90)
++add_library(gdma::gdma ALIAS libgdma)
 +if (NOT ${BUILD_SHARED_LIBS})
-+    set_target_properties(gdma PROPERTIES POSITION_INDEPENDENT_CODE ${BUILD_FPIC})
++    set_target_properties(libgdma PROPERTIES POSITION_INDEPENDENT_CODE ${BUILD_FPIC})
 +endif()
 +if(${BUILD_SHARED_LIBS})
-+    target_link_libraries(gdma PRIVATE ${LIBC_INTERJECT})
++    target_link_libraries(libgdma PRIVATE ${LIBC_INTERJECT})
 +
 +    if(APPLE)
-+        set_target_properties(gdma PROPERTIES LINK_FLAGS "-undefined dynamic_lookup")
++        set_target_properties(libgdma PROPERTIES LINK_FLAGS "-undefined dynamic_lookup")
 +    endif()
++    set_target_properties(libgdma PROPERTIES ENABLE_EXPORTS ON)
 +endif()
 +
 +set(export_properties
 +  "gdma_VERSION"
 +  )
-+set_target_properties(gdma PROPERTIES gdma_VERSION ${gdma_VERSION})
-+set_property(TARGET gdma APPEND PROPERTY EXPORT_PROPERTIES "${export_properties}")
++set_target_properties(libgdma PROPERTIES gdma_VERSION ${gdma_VERSION})
++set_property(TARGET libgdma APPEND PROPERTY EXPORT_PROPERTIES "${export_properties}")
 +
 +add_executable(gdmaexe src/exe.f90)
 +add_executable(gdma::exe ALIAS gdmaexe)
-+target_link_libraries(gdmaexe gdma)
++target_link_libraries(gdmaexe libgdma)
 +set_target_properties(gdmaexe
 +  PROPERTIES
 +    INSTALL_RPATH "$ORIGIN/../${CMAKE_INSTALL_LIBDIR}"
 +    EXPORT_NAME "exe"
 +    OUTPUT_NAME "gdma"
++    #ENABLE_EXPORTS ON
 +  )
 +
 +# Python directory
@@ -146,7 +152,7 @@ index 0000000..3991e02
 +        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/GDMA)
 +install(
 +  TARGETS
-+    gdma
++    libgdma
 +    gdmaexe
 +  EXPORT
 +    library_interface
@@ -162,8 +168,8 @@ index 0000000..3991e02
 +
 +# <<<  Export Interface  >>>
 +
-+target_compile_definitions(gdma INTERFACE USING_${gdma})
-+target_include_directories(gdma INTERFACE
++target_compile_definitions(libgdma INTERFACE USING_${gdma})
++target_include_directories(libgdma INTERFACE
 +                           $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
 +
 +# <<<  Export Config  >>>
@@ -1502,7 +1508,7 @@ index 0000000..ab74356
 +!CHARACTER(LEN=80) :: buffer
 +!CHARACTER(LEN=20) :: key
 +!CHARACTER(LEN=8) :: whichd="SCF"
-+!CHARACTER(LEN=24) :: datestring
++CHARACTER(LEN=24) :: datestring
 +!
 +!!  Maximum number of sites is number of atoms + nextra
 +!INTEGER :: nextra=16

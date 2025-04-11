@@ -1,0 +1,52 @@
+From 825f6893cc4af5feb6de8c45b8b3ff33d45e768d Mon Sep 17 00:00:00 2001
+From: "Lori A. Burns" <lori.burns@gmail.com>
+Date: Mon, 7 Apr 2025 02:26:11 -0400
+Subject: [PATCH] asdf
+
+---
+ src/input.F90 | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/src/input.F90 b/src/input.F90
+index a999cbb..0990d21 100644
+--- a/src/input.F90
++++ b/src/input.F90
+@@ -56,11 +56,11 @@ INTEGER, SAVE :: lc=3
+ INTEGER, PARAMETER :: sp=kind(1.0), dp=kind(1d0)!, qp=selected_real_kind(30)
+ 
+ INTERFACE readf
+-  MODULE PROCEDURE read_single, read_double, readv_double, read_quad
++  MODULE PROCEDURE read_single, read_double, readv_double !, read_quad
+ END INTERFACE readf
+ 
+ INTERFACE getf
+-  MODULE PROCEDURE get_double, get_quad
++  MODULE PROCEDURE get_double !, get_quad
+ END INTERFACE getf
+ 
+ PRIVATE
+@@ -644,8 +644,8 @@ SUBROUTINE read_quad(A,factor)
+ !  If the optional argument factor is present, the value read should be
+ !  divided by it. (External value = factor*internal value)
+ 
+-REAL(KIND=real128), INTENT(INOUT) :: a
+-REAL(KIND=real128), INTENT(IN), OPTIONAL :: factor
++REAL(KIND=real64), INTENT(INOUT) :: a
++REAL(KIND=real64), INTENT(IN), OPTIONAL :: factor
+ 
+ CHARACTER(LEN=50) :: string
+ 
+@@ -849,8 +849,8 @@ SUBROUTINE get_quad(A,factor)
+ !  If the optional argument factor is present, the value read should be
+ !  divided by it. (External value = factor*internal value)
+ 
+-REAL(real128), INTENT(INOUT) :: A
+-REAL(real128), INTENT(IN), OPTIONAL :: factor
++REAL(real64), INTENT(INOUT) :: A
++REAL(real64), INTENT(IN), OPTIONAL :: factor
+ 
+ LOGICAL :: eof
+ 
+-- 
+1.8.3.1
+
