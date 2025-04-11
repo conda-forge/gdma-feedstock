@@ -52,6 +52,7 @@ outputs:
         - ls -l $PREFIX/share/cmake/gdma                                         # [unix]
         - dir %PREFIX%\\Library\\lib                                             # [win]
         - dir %PREFIX%\\Library\\share\\cmake\\gdma                              # [win]
+        - dir %PREFIX%\\Library\\bin                                             # [win]
         # Verify library
         - test -f $PREFIX/lib/libgdma$SHLIB_EXT                                  # [unix]
         - test ! -f $PREFIX/lib/libgdma.a                                        # [unix]
@@ -64,8 +65,18 @@ outputs:
         - ldd -v $PREFIX/lib/libgdma$SHLIB_EXT                                   # [linux and build_platform == target_platform]
         - otool -L $PREFIX/lib/libgdma$SHLIB_EXT                                 # [osx]
         # Actually test
-        - cd examples/H2O/ && gdma < data                                        # [unix]
-        - cd examples/H2O/ && gdma.exe < data                                    # [win]
+        - echo aaa
+        - cd examples/H2O/
+        #- cd examples/H2O/ && gdma < data                                        # [unix]
+        - gdma < data                                        # [unix]
+        - echo aaa2
+        #- cd examples/H2O/ && gdma.exe < data                                    # [win]
+        - dir .  # [win]
+        - echo aaa3
+        - gdma.exe
+        - echo aaa4
+        - gdma.exe < data                                    # [win]
+        - echo aaa5
 
   - name: pygdma
     script: build-py.sh                                                          # [unix]
