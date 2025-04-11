@@ -1,10 +1,11 @@
 @ECHO ON
 SetLocal EnableDelayedExpansion
 
-set "CC=clang-cl.exe"
-set "CXX=clang-cl.exe"
-set "FC=flang.exe"
+::set "CC=clang-cl.exe"
+::set "CXX=clang-cl.exe"
+::set "FC=flang.exe"
 ::set "LD=link.exe"
+set "LDFLAGS=/link /DEFAULTLIB:%CONDA_PREFIX%\lib\clang\@MAJOR_VER@\lib\windows\clang_rt.builtins-x86_64.lib"
 
 :: flang still uses a temporary name not recognized by CMake
 copy %BUILD_PREFIX%\Library\bin\flang-new.exe %BUILD_PREFIX%\Library\bin\flang.exe
