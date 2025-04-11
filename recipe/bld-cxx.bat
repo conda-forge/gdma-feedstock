@@ -10,10 +10,11 @@ SetLocal EnableDelayedExpansion
 ::set "LDFLAGS=/link /DEFAULTLIB:%CONDA_PREFIX%\lib\clang\@MAJOR_VER@\lib\windows\clang_rt.builtins-x86_64.lib"
 
 :: flang-activation-feedstock/.../activate.bat
-set "LDFLAGS=%LDFLAGS% -Wl,-defaultlib:%CONDA_PREFIX:\=/%/lib/clang/@MAJOR_VER@/lib/windows/clang_rt.builtins-x86_64.lib"
+:: FAILS: "D:/bld/gdma-split_1744384002874/_build_env/Library/bin/clang-cl.exe" is not able to compile a simple test program.
+::set "LDFLAGS=%LDFLAGS% -Wl,-defaultlib:%CONDA_PREFIX:\=/%/lib/clang/@MAJOR_VER@/lib/windows/clang_rt.builtins-x86_64.lib"
 
 :: clang-win-activation-feedstock/.../activate-clang_win-64.bat
-::set "LDFLAGS=-nostdlib -Wl,-defaultlib:%CONDA_PREFIX:\=/%/lib/clang/@MAJOR_VER@/lib/windows/clang_rt.builtins-x86_64.lib"
+set "LDFLAGS=-nostdlib -Wl,-defaultlib:%CONDA_PREFIX:\=/%/lib/clang/@MAJOR_VER@/lib/windows/clang_rt.builtins-x86_64.lib"
 
 :: flang still uses a temporary name not recognized by CMake
 copy %BUILD_PREFIX%\Library\bin\flang-new.exe %BUILD_PREFIX%\Library\bin\flang.exe
