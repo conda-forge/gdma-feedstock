@@ -8,13 +8,18 @@ SetLocal EnableDelayedExpansion
 
 :: clang-win-activation-feedstock/.../activate-clang-cl_win-64.bat
 ::set "LDFLAGS=/link /DEFAULTLIB:%CONDA_PREFIX%\lib\clang\@MAJOR_VER@\lib\windows\clang_rt.builtins-x86_64.lib"
+set "LDFLAGS=/DEFAULTLIB:%CONDA_PREFIX%\lib\clang\@MAJOR_VER@\lib\windows\clang_rt.builtins-x86_64.lib"
 
 :: flang-activation-feedstock/.../activate.bat
 :: FAILS: "D:/bld/gdma-split_1744384002874/_build_env/Library/bin/clang-cl.exe" is not able to compile a simple test program.
 ::set "LDFLAGS=%LDFLAGS% -Wl,-defaultlib:%CONDA_PREFIX:\=/%/lib/clang/@MAJOR_VER@/lib/windows/clang_rt.builtins-x86_64.lib"
 
 :: clang-win-activation-feedstock/.../activate-clang_win-64.bat
-set "LDFLAGS=-nostdlib -Wl,-defaultlib:%CONDA_PREFIX:\=/%/lib/clang/@MAJOR_VER@/lib/windows/clang_rt.builtins-x86_64.lib"
+:: ALLOWS compiler and library link. on exe: LINK: command "D:\bld\gdma-split_1744384917393\_build_env\Library\bin\lld-link.exe /nologo CMakeFiles\gdmaexe.dir\src\exe.f90.obj /out:gdma.exe /implib:gdma.lib /pdb:gdma.pdb /version:0.0 /machine:x64 -nostdlib -Wl,-defaultlib:D:/bld/gdma-split_1744384917393/_build_env/lib/clang/@MAJOR_VER@/lib/windows/clang_rt.builtins-x86_64.lib /INCREMENTAL:NO /subsystem:console libgdma.lib -libpath:D:/bld/gdma-split_1744384917393/_build_env/Library/lib -libpath:D:/bld/gdma-split_1744384917393/_build_env/Library/lib/clang/20/lib/windows /MANIFEST:EMBED,ID=1" failed (exit code 1) with the following output:
+::lld-link: warning: ignoring unknown argument '-nostdlib'
+::lld-link: warning: ignoring unknown argument '-Wl,-defaultlib:D:/bld/gdma-split_1744384917393/_build_env/lib/clang/@MAJOR_VER@/lib/windows/clang_rt.builtins-x86_64.lib'
+::set "LDFLAGS=-nostdlib -Wl,-defaultlib:%CONDA_PREFIX:\=/%/lib/clang/@MAJOR_VER@/lib/windows/clang_rt.builtins-x86_64.lib"
+
 
 :: flang still uses a temporary name not recognized by CMake
 copy %BUILD_PREFIX%\Library\bin\flang-new.exe %BUILD_PREFIX%\Library\bin\flang.exe

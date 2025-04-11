@@ -1508,7 +1508,7 @@ index 0000000..ab74356
 +!CHARACTER(LEN=80) :: buffer
 +!CHARACTER(LEN=20) :: key
 +!CHARACTER(LEN=8) :: whichd="SCF"
-+!CHARACTER(LEN=24) :: datestring
++CHARACTER(LEN=24) :: datestring
 +!
 +!!  Maximum number of sites is number of atoms + nextra
 +!INTEGER :: nextra=16
