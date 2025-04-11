@@ -55,7 +55,7 @@ if errorlevel 1 exit 1
 
 cmake --build build ^
       --config Release ^
-      --target libgdma ^
+      --target gdma ^
       -- -j %CPU_COUNT%
 if errorlevel 1 exit 1
 
