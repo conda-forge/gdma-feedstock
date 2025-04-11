@@ -1,13 +1,13 @@
 for /f %%i in ('python -c "import platform; print(int(platform.python_implementation() == 'PyPy'))"') do set IS_PYPY=%%i
 
+set "LDFLAGS=/DEFAULTLIB:%CONDA_PREFIX%\lib\clang\20\lib\windows\clang_rt.builtins-x86_64.lib"
+
 cmake %CMAKE_ARGS% ^
   -G "Ninja" ^
   -S "%SRC_DIR%\\pygdma" ^
   -B "build_py%PY_VER%%IS_PYPY%" ^
   -D CMAKE_BUILD_TYPE=Release ^
   -D CMAKE_INSTALL_PREFIX="%PREFIX%" ^
-  -D CMAKE_C_COMPILER="clang-cl" ^
-  -D CMAKE_CXX_COMPILER="clang-cl" ^
   -D CMAKE_CXX_FLAGS="/EHsc %CXXFLAGS%" ^
   -D CMAKE_INSTALL_LIBDIR="Library\lib" ^
   -D CMAKE_INSTALL_INCLUDEDIR="Library\include" ^
