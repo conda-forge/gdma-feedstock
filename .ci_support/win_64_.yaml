@@ -6,32 +6,9 @@ channel_sources:
 - conda-forge
 channel_targets:
 - conda-forge main
-cxx_compiler:
-- clang-cl
 fortran_compiler:
 - flang
 fortran_compiler_version:
 - '20'
-pin_run_as_build:
-  python:
-    min_pin: x.x
-    max_pin: x.x
-pybind11_abi:
-- '4'
-python:
-- 3.10.* *_cpython
-- 3.11.* *_cpython
-- 3.12.* *_cpython
-- 3.13.* *_cp313
-- 3.9.* *_cpython
-python_impl:
-- cpython
-- cpython
-- cpython
-- cpython
-- cpython
 target_platform:
 - win-64
-zip_keys:
-- - python
-  - python_impl
