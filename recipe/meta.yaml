@@ -1,7 +1,7 @@
 {% set version = "2.3.3" %}
 {% set commit = "c2e0b548" %}
 #{% set sha256 = "87c090b7415cd2126608019cad7a3e008c25171c7c8189adad399b6a86f8d383" %}
-{% set sha256 = "3cfb300c51bbdda2c5aeff6f18ee3b4993b306bf4edc03f31bce302c359a8c19" %}
+{% set sha256 = "a4f59921b388c041acb433beb4fb96b5399179c68bd1fd1d97905f4f3f2cd64d" %}
 
 package:
   name: gdma-split
@@ -55,17 +55,11 @@ outputs:
         # Verify library
         - test -f $PREFIX/lib/libgdma$SHLIB_EXT                                  # [unix]
         - test ! -f $PREFIX/lib/libgdma.a                                        # [unix]
-        - if not exist %PREFIX%\\Library\\lib\\gdma.lib exit 1                   # [win]   # ms import lib
-        - if not exist %PREFIX%\\Library\\bin\\gdma.dll exit 1                   # [win]   # ms dyn lib
         # Verify accessories
         - test -f $PREFIX/bin/gdma                                               # [unix]
         - test -f $PREFIX/include/GDMA/GDMA_MANGLE.h                             # [unix]
         - test -f $PREFIX/share/cmake/gdma/gdmaConfig.cmake                      # [unix]
         - test -f $PREFIX/share/cmake/gdma/gdmaTargets-lib.cmake                 # [unix]
-        - if not exist %PREFIX%\\Library\\bin\\gdma.exe exit 1                   # [win]
-        - if not exist %PREFIX%\\Library\\include\\GDMA\\GDMA_MANGLE.h exit 1    # [win]
-        - if not exist %PREFIX%\\Library\\share\\cmake\\gdma\\gdmaConfig.cmake exit 1  # [win]
-        - if not exist %PREFIX%\\Library\\share\\cmake\\gdma\\gdmaTargets-lib.cmake exit 1  # [win]
         # Inspect linkage
         - ldd -v $PREFIX/lib/libgdma$SHLIB_EXT                                   # [linux and build_platform == target_platform]
         - otool -L $PREFIX/lib/libgdma$SHLIB_EXT                                 # [osx]

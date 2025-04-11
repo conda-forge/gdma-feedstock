@@ -6,6 +6,7 @@ SetLocal EnableDelayedExpansion
 ::set "FC=flang.exe"
 ::set "LD=link.exe"
 
+echo %FFLAGS%
 echo %LDFLAGS%
 echo %MAJOR_VER%
 
@@ -46,7 +47,7 @@ cmake %CMAKE_ARGS% ^
   -D CMAKE_INSTALL_DATADIR="Library\share" ^
   -D gdma_INSTALL_CMAKEDIR="Library\share\cmake\gdma" ^
   -D gdma_ENABLE_PYTHON=OFF ^
-  -D BUILD_SHARED_LIBS=ON ^
+  -D BUILD_SHARED_LIBS=OFF ^
   -D CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=ON ^
   -D ENABLE_XHOST=OFF ^
   -D CMAKE_VERBOSE_MAKEFILE=OFF ^
@@ -61,7 +62,6 @@ if errorlevel 1 exit 1
 
 dir build
 :: objdump.exe -p %PREFIX%\Lib\site-packages\psi4\core.*.pyd | findstr /i "dll"
-objdump.exe -p build\libgdma.dll
 
 cmake --build build ^
       --config Release ^
