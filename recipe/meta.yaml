@@ -98,6 +98,7 @@ outputs:
         - pybind11
         - pybind11-abi
       run:
+        - libgcc                                                                 # [osx]   # libgcc_s.1.1.dylib needed
         - {{ pin_subpackage('gdma', exact=True) }}
         - python
     test:
