@@ -41,6 +41,8 @@ outputs:
         - cmake
         - ninja
         - python 3.12                                                                      # only for generating a source file, so suppress all but one Py version. update as necessary.
+      run:
+        - libgcc                                                                 # [osx]   # libgcc_s.1.1.dylib needed
     test:
       source_files:
         - examples/H2O/data
@@ -98,7 +100,6 @@ outputs:
         - pybind11
         - pybind11-abi
       run:
-        - libgcc                                                                 # [osx]   # libgcc_s.1.1.dylib needed
         - {{ pin_subpackage('gdma', exact=True) }}
         - python
     test:
