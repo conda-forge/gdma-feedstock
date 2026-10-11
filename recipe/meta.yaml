@@ -41,7 +41,8 @@ outputs:
         - cmake
         - ninja
         - python 3.12                                                                      # only for generating a source file, so suppress all but one Py version. update as necessary.
-        - libpython                                                              # [osx]
+      run:
+        - libgcc                                                                 # [osx]   # libgcc_s.1.1.dylib needed
     test:
       source_files:
         - examples/H2O/data
@@ -91,7 +92,6 @@ outputs:
         - cmake
         - ninja
         - python                                                                 # [build_platform != target_platform]
-        - libpython                                                              # [build_platform != target_platform]
         - cross-python_{{ target_platform }}                                     # [build_platform != target_platform]
         - pybind11                                                               # [build_platform != target_platform]
       host:
@@ -103,7 +103,6 @@ outputs:
       run:
         - {{ pin_subpackage('gdma', exact=True) }}
         - python
-        - libpython
     test:
       requires:
         - pip                                                                              # provides `pip check`
