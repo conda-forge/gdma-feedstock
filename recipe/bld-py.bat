@@ -1,5 +1,10 @@
 for /f %%i in ('python -c "import platform; print(int(platform.python_implementation() == 'PyPy'))"') do set IS_PYPY=%%i
 
+set SITEP="/../../Lib/site-packages"
+IF "%PY_VER%"=="3.15" (
+  set SITEP="/../../lib/python/site-packages"
+)
+
 cmake %CMAKE_ARGS% ^
   -G "Ninja" ^
   -S "%SRC_DIR%\\pygdma" ^
@@ -12,7 +17,7 @@ cmake %CMAKE_ARGS% ^
   -D CMAKE_INSTALL_INCLUDEDIR="Library\include" ^
   -D CMAKE_INSTALL_BINDIR="Library\bin" ^
   -D CMAKE_INSTALL_DATADIR="Library\share" ^
-  -D PYMOD_INSTALL_LIBDIR="/../../Lib/site-packages" ^
+  -D PYMOD_INSTALL_LIBDIR="%SITEP%" ^
   -D gdma_INSTALL_CMAKEDIR="Library\share\cmake\gdma" ^
   -D Python_EXECUTABLE="%PYTHON%" ^
   -D CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS=ON ^
