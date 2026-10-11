@@ -97,6 +97,7 @@ outputs:
       host:
         - {{ pin_subpackage('gdma', exact=True) }}
         - python
+        - libpython                                                              # [unix]
         - pybind11
         - pybind11-abi
       run:
