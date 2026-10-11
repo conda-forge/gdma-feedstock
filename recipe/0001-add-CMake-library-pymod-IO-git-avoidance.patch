@@ -39,7 +39,7 @@ new file mode 100644
 index 0000000..3991e02
 --- /dev/null
 +++ b/CMakeLists.txt
-@@ -0,0 +1,153 @@
+@@ -0,0 +1,157 @@
 +cmake_policy(SET CMP0048 NEW)
 +cmake_minimum_required(VERSION 3.16)
 +project(gdma
@@ -128,9 +128,14 @@ index 0000000..3991e02
 +add_executable(gdmaexe src/exe.f90)
 +add_executable(gdma::exe ALIAS gdmaexe)
 +target_link_libraries(gdmaexe gdma)
++if(APPLE)
++  set(gdma_exe_install_rpath "@loader_path/../${CMAKE_INSTALL_LIBDIR}")
++else()
++  set(gdma_exe_install_rpath "$ORIGIN/../${CMAKE_INSTALL_LIBDIR}")
++endif()
 +set_target_properties(gdmaexe
 +  PROPERTIES
-+    INSTALL_RPATH "$ORIGIN/../${CMAKE_INSTALL_LIBDIR}"
++    INSTALL_RPATH "${gdma_exe_install_rpath}"
 +    EXPORT_NAME "exe"
 +    OUTPUT_NAME "gdma"
 +  )
